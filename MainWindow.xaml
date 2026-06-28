@@ -1,0 +1,16 @@
+<Window x:Class="YoloAOIApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="YOLO AOI - Distance Measurement" Height="900" Width="1400"
+        Background="#F0F0F0">
+    <Grid>
+        <TabControl>
+            <TabItem Header="Setup">
+                <Frame x:Name="SetupFrame" NavigationUIVisibility="Hidden" />
+            </TabItem>
+            <TabItem Header="Inference">
+                <Frame x:Name="InferenceFrame" NavigationUIVisibility="Hidden" />
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

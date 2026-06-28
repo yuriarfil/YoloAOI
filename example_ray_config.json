@@ -1,0 +1,25 @@
+{
+  "rules": [
+    {
+      "distanceName": "distance1",
+      "ruleName": "Component_A-Component_B",
+      "calculationMethod": "OffsetObject",
+      "offsetMeasurement": "Both",
+      "objA": {
+        "classId": 0,
+        "className": "Component_A",
+        "dir": [0.7071, 0.7071],
+        "localDir": [0.0, 0.0]
+      },
+      "objB": {
+        "classId": 1,
+        "className": "Component_B",
+        "dir": [0.0, 1.0],
+        "localDir": [0.0, 0.0]
+      },
+      "minDist": 10.0,
+      "maxDist": 20.0,
+      "useSameObject": false
+    }
+  ]
+}

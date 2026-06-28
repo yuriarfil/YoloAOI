@@ -1,0 +1,21 @@
+## .NET
+bin/
+obj/
+*.user
+*.suo
+*.cache
+*.vs/
+*.DotSettings.user
+
+## IDE
+.vs/
+*.csproj.user
+
+## OS
+Thumbs.db
+.DS_Store
+
+## Build output
+*.exe
+*.pdb
+*.dll
