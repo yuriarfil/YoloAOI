@@ -7,6 +7,7 @@ A .NET 8 WPF desktop application for YOLO instance segmentation and distance mea
 ✅ **YOLO Instance Segmentation** - Using YoloDotNet for fast inference  
 ✅ **Geometry Operations** - Ray-casting and distance calculations using NetTopologySuite  
 ✅ **Interactive Setup** - Click-based direction point selection  
+✅ **PASS/FAIL Overlay** - Green/red indicator on inference results  
 ✅ **JSON Configuration** - Save and load measurement configurations  
 ✅ **Cross-platform** - Works on Windows, with Linux/macOS support via .NET 8
 
@@ -67,7 +68,16 @@ dotnet run
 1. **Load Configuration**: Click "Load Configuration" to load saved setup
 2. **Upload Image**: Click "Select Image" to choose an image for measurement
 3. **Run Inference**: Click "Run Inference" to detect and measure distance
-4. **View Results**: Annotated image shows hit points and distance measurement
+4. **View Results**: Annotated image shows hit points and distance measurement  
+5. **Review Status**: Bottom-left PASS (green) or FAILED (red) overlay shows overall result
+
+## Screenshots
+
+![Setup View](Setup.jpg)  
+*Setup tab — class selection and direction point placement*
+
+![Inference View](Inference.jpg)  
+*Inference tab — measurement results with PASS/FAIL overlay*
 
 ## Project Structure
 

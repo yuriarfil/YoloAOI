@@ -310,6 +310,37 @@ public class ImageService
             textY += 30;
         }
 
+        // ── PASS / FAIL OVERLAY (bottom-left) ───────────────────────────────────────────
+        if (output.Results.Count > 0)
+        {
+            var allOk = output.Results.All(r => r.Status == "OK");
+            var bgColor = allOk ? new SKColor(76, 175, 80) : new SKColor(244, 67, 54);
+            var label = allOk ? "PASS" : "FAILED";
+
+            using var labelFont = new SKFont(SKTypeface.Default, 36);
+            var textWidth = labelFont.MeasureText(label);
+            float padding = 16;
+            float boxWidth = textWidth + padding * 2;
+            float boxHeight = 48;
+            float boxX = 20;
+            float boxY = copy.Height - boxHeight - 20;
+
+            using var bgPaint = new SKPaint
+            {
+                Color = bgColor,
+                IsAntialias = true,
+                Style = SKPaintStyle.Fill
+            };
+            canvas.DrawRoundRect(boxX, boxY, boxWidth, boxHeight, 8, 8, bgPaint);
+
+            using var textPaint = new SKPaint
+            {
+                Color = SKColors.White,
+                IsAntialias = true
+            };
+            canvas.DrawText(label, boxX + padding, boxY + boxHeight - 14, labelFont, textPaint);
+        }
+
         return copy;
     }
 

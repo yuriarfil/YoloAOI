@@ -106,7 +106,7 @@
                         <DataGridTemplateColumn Header="Min Distance" Width="Auto">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox Text="{Binding MinDist, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                    <TextBox Text="{Binding MinDist, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" 
                                              VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Padding="2"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
@@ -114,7 +114,7 @@
                         <DataGridTemplateColumn Header="Max Distance" Width="Auto">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox Text="{Binding MaxDist, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                    <TextBox Text="{Binding MaxDist, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" 
                                              VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Padding="2"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
@@ -140,6 +140,14 @@
                         </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
+
+                <StackPanel Margin="0,0,0,15">
+                    <TextBlock Text="Calibration (mm/pixel):" FontWeight="Bold" Margin="0,0,0,5"/>
+                    <TextBox Text="{Binding PixelToMmRatio, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                             Height="30" VerticalContentAlignment="Center" Padding="4"/>
+                    <TextBlock Text="1.0 = pixels only. Enter mm/pixel ratio for real-world units." 
+                               FontSize="11" Foreground="#666" Margin="0,4,0,0"/>
+                </StackPanel>
 
                 <Separator Margin="0,0,0,20"/>
 
@@ -170,14 +178,12 @@
 
         <!-- Right Panel: Image Display -->
         <Border Grid.Column="1" BorderBrush="#D0D0D0" BorderThickness="1" Margin="0,20,20,20" Background="Black">
-            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+            <Grid>
                 <Image x:Name="DisplayImage" 
                        Source="{Binding DisplayImage}" 
                        MouseDown="Image_MouseDown"
-                       Stretch="Uniform"
-                       VerticalAlignment="Top"
-                       HorizontalAlignment="Left"/>
-            </ScrollViewer>
+                       Stretch="Uniform"/>
+            </Grid>
         </Border>
     </Grid>
 </Page>

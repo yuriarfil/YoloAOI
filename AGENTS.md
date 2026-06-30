@@ -41,7 +41,7 @@ Update these for different environments. The YOLO model must be ONNX format (exp
 
 ## Config format
 
-`ray_config.json` uses `RayConfig` → `List<MeasurementRule>`. Each rule has `ObjA`/`ObjB` (each with `ClassId`, `ClassName`, `Dir`[screen], `LocalDir`[rotation-aware]), `MinDist`, `MaxDist`, `CalculationMethod`, `UseSameObject`.
+`ray_config.json` uses `RayConfig` → `List<MeasurementRule>`. Each rule has `ObjA`/`ObjB` (each with `ClassId`, `ClassName`, `Dir`[screen], `LocalDir`[rotation-aware]), `MinDist`, `MaxDist`, `CalculationMethod`, `UseSameObject`, `OffsetMeasurement`. Top-level `PixelToMmRatio` (default `1.0`) converts pixel distances to mm — set in Setup via "Calibration" textbox. When `PixelToMmRatio` is `1.0`, units display as `px`; otherwise as `mm`. AngleObject (degrees) is unaffected by this ratio.
 
 ## Useful references
 

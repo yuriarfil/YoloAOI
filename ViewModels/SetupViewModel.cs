@@ -168,6 +168,14 @@ public class SetupViewModel : ObservableObject
         set => SetProperty(ref _selectedOffsetMeasurement, value);
     }
 
+    private double _pixelToMmRatio = 1.0;
+
+    public double PixelToMmRatio
+    {
+        get => _pixelToMmRatio;
+        set => SetProperty(ref _pixelToMmRatio, value);
+    }
+
     public IAsyncRelayCommand<string> SetupCommand { get; }
     public IAsyncRelayCommand LoadImageCommand { get; }
     public IRelayCommand ResetPointsCommand { get; }
@@ -383,7 +391,8 @@ public class SetupViewModel : ObservableObject
 
             var config = new RayConfig
             {
-                Rules = MeasurementRules.ToList()
+                Rules = MeasurementRules.ToList(),
+                PixelToMmRatio = _pixelToMmRatio
             };
 
             var saved = await Task.Run(() => _configService.SaveConfig(_configPath, config));

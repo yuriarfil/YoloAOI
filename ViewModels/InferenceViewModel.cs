@@ -133,6 +133,9 @@ public class InferenceViewModel : ObservableObject
                 return;
             }
 
+            var pxToMm = _config.PixelToMmRatio;
+            var unitSuffix = pxToMm == 1.0 ? "px" : "mm";
+
             StatusMessage = "Running inference...";
 
             var detection = await _inferenceService.DetectAsync(_uploadedImage);
@@ -188,11 +191,12 @@ public class InferenceViewModel : ObservableObject
                             if (offsetMode == "AlongAxis" || offsetMode == "Both")
                             {
                                 // Along-axis offset: signed projection of (centroidA - centroidB) onto B's axis
-                                var absOffset = Math.Abs(xOffset);
+                                var xOffsetMm = xOffset * pxToMm;
+                                var absOffset = Math.Abs(xOffsetMm);
                                 var status = absOffset >= rule.MinDist && absOffset <= rule.MaxDist ? "OK" : "NOK";
-                                mResult.Distance = xOffset;
+                                mResult.Distance = xOffsetMm;
                                 mResult.Status = status;
-                                mResult.Message = $"{xOffset:+0.0;-0.0;0.0}px";
+                                mResult.Message = $"{xOffsetMm:+0.0;-0.0;0.0}{unitSuffix}";
                                 mResult.IsXOffset = true;
 
                                 mResult.CentroidA = cA;
@@ -209,14 +213,15 @@ public class InferenceViewModel : ObservableObject
 
                             if (offsetMode == "Perpendicular" || offsetMode == "Both")
                             {
-                                var status = perpDistance >= rule.MinDist && perpDistance <= rule.MaxDist ? "OK" : "NOK";
+                                var perpDistanceMm = perpDistance * pxToMm;
+                                var status = perpDistanceMm >= rule.MinDist && perpDistanceMm <= rule.MaxDist ? "OK" : "NOK";
                                 var perpResult = new MeasurementResult
                                 {
                                     DistanceName = offsetMode == "Both" ? rule.DistanceName + "_perp" : rule.DistanceName,
                                     RuleName = rule.RuleName,
-                                    Distance = perpDistance,
+                                    Distance = perpDistanceMm,
                                     Status = status,
-                                    Message = $"{perpDistance:F1}px",
+                                    Message = $"{perpDistanceMm:F1}{unitSuffix}",
                                     Point1 = cA,
                                     Point2 = projPt,
                                     IsPerpendicularOffset = true,
@@ -294,11 +299,12 @@ public class InferenceViewModel : ObservableObject
                         else
                         {
                             var distance = _geometryService.Distance(p1, p2);
-                            var status = distance >= rule.MinDist && distance <= rule.MaxDist ? "OK" : "NOK";
+                            var distanceMm = distance * pxToMm;
+                            var status = distanceMm >= rule.MinDist && distanceMm <= rule.MaxDist ? "OK" : "NOK";
                             
-                            mResult.Distance = distance;
+                            mResult.Distance = distanceMm;
                             mResult.Status = status;
-                            mResult.Message = $"{distance:F1}px";
+                            mResult.Message = $"{distanceMm:F1}{unitSuffix}";
                             mResult.Point1 = p1;
                             mResult.Point2 = p2;
                         }

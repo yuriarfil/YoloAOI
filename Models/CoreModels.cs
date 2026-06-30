@@ -6,6 +6,7 @@ namespace YoloAOIApp.Models;
 public class RayConfig
 {
     public List<MeasurementRule> Rules { get; set; } = new();
+    public double PixelToMmRatio { get; set; } = 1.0;
 }
 
 public class MeasurementRule
